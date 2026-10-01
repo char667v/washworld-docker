@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, session, redirect, s
 import uuid
 import x
 import time
+import os
 from flask_session import Session
 from werkzeug.security import generate_password_hash  
 from werkzeug.security import check_password_hash 
@@ -20,7 +21,8 @@ app = Flask(__name__)
 CORS(app)  # allows everything
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
-app.config["JWT_SECRET_KEY"] = "password"
+# app.config["JWT_SECRET_KEY"] = "password"
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 jwt = JWTManager(app)
 #############
 @app.route('/icons/<path:filename>')
@@ -314,7 +316,7 @@ def login():
             }), 400
 
         ic(user_email)
-        ic(user_password)
+        #ic(user_password)
        
         # ic(user_email)
 

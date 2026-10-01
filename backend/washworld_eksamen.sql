@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Jun 07, 2026 at 07:43 AM
+-- Generation Time: Oct 01, 2026 at 07:00 PM
 -- Server version: 10.6.20-MariaDB-ubu2004
 -- PHP Version: 8.3.26
 
@@ -59,6 +59,7 @@ INSERT INTO `cars` (`car_id`, `car_plate`, `car_user_fk`, `created_at`, `updated
 ('823ebf5236434c67a872689f921df7a9', 'AB12345', 'd2548979df7645d9a17862a9ec99a7f0', 1779434963, NULL, NULL),
 ('834566a8d75d4523988b7fb2623a2ecf', 'dj090909', '54e34fb7f5734cb2904662cc0a49595a', 1780308940, NULL, NULL),
 ('8c2aef1bc861478fb0fc49ad6a1055fa', 'A123456', '590f564104b54da089d1f3895db2ca9d', 1779624137, NULL, NULL),
+('8ce82de7e67f481a89af85998b4db021', 'AB12345', '4eaf8593a6b84ac29947f5596f37b69f', 1790880060, NULL, NULL),
 ('8dcacc22443c4340a05a879edcaccde9', '84848484', '416dab33ad6b4b099e694c668ea0a13a', 1779436369, NULL, NULL),
 ('a6e92f7c624d4afd800113e6befac4d2', 'AB12345', '4d2a63391e40402facfec0af4ddb753a', 1779309780, NULL, NULL),
 ('c03231388f374b05887b85d4c6c4e546', 'AB12345', 'fd88d38fb4804b9093cdb7e3fe54ed17', 1778680487, NULL, NULL),
@@ -189,6 +190,7 @@ INSERT INTO `transactions` (`transaction_id`, `transaction_user_fk`, `transactio
 ('a015016a65764c3bbc239448f1215c13', 'd8da90f3673a4848ad1d319b76b9deea', 'Card', '104eb10034fd4a07888fd6937ad6aea8', 1780562010),
 ('bafd862c5a974967b7b747d5c219ba51', 'e7de153890704b66826a9e1f7aa03310', 'ed1aeb774ca211f18db996d21e5e70c2', '104eb10034fd4a07888fd6937ad6aea8', 1779878455),
 ('c0d0d351dfbf49528868428239054977', '5b1a4a2eea7647d5a0a6bb64abec543f', 'f6baa1f7550411f19eb9c6366b8011fe', '46514f804c0111f18db996d21e5e70c2', 1780565310),
+('db39843e034546ccbdd7e6fb580db3ba', '4eaf8593a6b84ac29947f5596f37b69f', 'ed1aeb774ca211f18db996d21e5e70c2', '0d5073d1426242c99f9ba711d99f2b34', 1790880060),
 ('ee188bc070ae4245bd429a5b93d4f569', '0958c122cad64b87a3019b160bb5bfc1', 'ed1aeb774ca211f18db996d21e5e70c2', '46514f804c0111f18db996d21e5e70c2', 1779445374),
 ('ef46a2ad4a0946acb0261bf41500762c', '483674be165f4613bf760c1e6756ba67', 'f6baa1f7550411f19eb9c6366b8011fe', '104eb10034fd4a07888fd6937ad6aea8', 1780570549);
 
@@ -205,6 +207,7 @@ CREATE TABLE `users` (
   `user_phone` varchar(20) NOT NULL,
   `user_email` varchar(50) NOT NULL,
   `user_password` varchar(255) NOT NULL,
+  `user_address` varchar(255) DEFAULT NULL,
   `created_at` bigint(20) NOT NULL,
   `deleted_at` bigint(20) DEFAULT NULL,
   `user_verification_key` char(32) DEFAULT NULL,
@@ -216,16 +219,17 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_last_name`, `user_phone`, `user_email`, `user_password`, `created_at`, `deleted_at`, `user_verification_key`, `user_verified_at`, `user_reset_password_key`) VALUES
-('003dea0d714e42c8b6416af02a92a631', 'PasswordTest', 'Test', '99999999', 'sophiehjelm010203@gmail.com', 'scrypt:32768:8:1$xwhkTq3WNOd1zTJ1$d5752a9457d489dc1de5f2a089f3ac845e337293710b93f996916f6d8a228b4b6bb6c2db13c581798c82031a8b9629087f2f89c39147131dcc3070ebc085f07f', 1778761898, NULL, '837ffe541def4aeaa3a7da228475e7bb', 1778761906, 'e290917b89d149f8b94d5a77c87aa0f5275ca3e6bdb946ec900d7cb5406b1466'),
-('416dab33ad6b4b099e694c668ea0a13a', 'svp', 'work', '22334455', 'sophie@hjelm.name', 'scrypt:32768:8:1$SHRyHwSLwFAZCJ7D$2911a89888109f917fd24dc353ae1fac3d982e463c04a5b5321804d4ae31ff0a96c270938304022444ec4d36ff094c6f9b73ad16c1596f58293fe0043d2ffbf9', 1779436369, NULL, '79092bd38dec4ead9eecab5875184628', 1779436451, NULL),
-('463c73471b6640b19b9eb851b66f2f5c', 'PasswordTest', 'Test', '12345678', 'testtoday@gmail.com', 'scrypt:32768:8:1$PdBAuEpAptj1i21B$c424c265b234f9399b0324e7113867a1130f88b9b57b097f9b2320c60fbeb82e597e4a3ae2fc2ee93e0c506f354912f51ce993deb070c58c02ac4b63f274a923', 1779306365, NULL, '09981dde73894d4c8dc2ee67445a4aa7', NULL, NULL),
-('4d2a63391e40402facfec0af4ddb753a', 'PasswordTest', 'Test', '12345678', 'porfavor@gmail.com', 'scrypt:32768:8:1$VdZlGQDJGyyHlrR5$8e162cc9985f971213f4cf5077326fd007acd5dfd9e0e2fd3ab96a1e5daa66b8c2522c31c48affd754d36ee7862edff2be5221a2fc388560a1a20be8b9b0c0dc', 1779309780, NULL, '0368e3deaea34b4b8c12d1df37c180eb', NULL, NULL),
-('54e34fb7f5734cb2904662cc0a49595a', 'charlotte', 'koudal', '22226666', 'nyhedsbrifer@gmail.com', 'scrypt:32768:8:1$IZO6JfWK0ui1vhXp$ed88a709196de74b0495fd3d1e9cebbbb642e4f2ea6df39dc9e5dd2c3905383de811a2c23e06dbbf3cdb7d25880293b3fcadc76b9954987107e859c77869c488', 1780308940, NULL, '3e923043696a437ab62537c5888ca3d0', NULL, NULL),
-('590f564104b54da089d1f3895db2ca9d', 'Sophia', 'Kingston', '50591108', 'sophia.anina@gmail.com', 'scrypt:32768:8:1$65XpKpmYn9JyAabo$506ddb55227ee822d1875a8758437892461446f87b535d655ae1e297d55f8f356a5db457a17e884ea41c4a403a3de6232b316cefa617f731960c68585f19eaf7', 1779624137, NULL, '6a9c42a7322348328be18639af7c7d12', 1779625827, NULL),
-('77b3171a4c554526af28daa7bdc65288', 'cc', 'kk', '44444444', 'c.koudal@gmail.com', 'scrypt:32768:8:1$3xtjS15xTUcw8EcE$51818856ec9d9d1be362942279000b8ebee9f7d230b08108de0d0e99da0ae9ddf13a9a69d965ec055495759bb0243414a3b468c008563f41e3ac0510f21915db', 1780745753, NULL, '62c5b15603c741d1818fe807c050ca02', 1780745789, NULL),
-('d2548979df7645d9a17862a9ec99a7f0', 'PasswordTest', 'Test', '12345678', 'testing@gmail.com', 'scrypt:32768:8:1$blJKJ1kqv08vdig0$3c83873cad4d1cc984708d603eaa32d6673bf05500c6c47d42e098b341679ce69f6bcb5601d6e70029cedeb0a2405c39845d91bd6c8516191d9e4bde3201c7c2', 1779434963, NULL, '09a7128dbbd740f28ebc553bbf337383', NULL, NULL),
-('fd88d38fb4804b9093cdb7e3fe54ed17', 'Test 5', 'Test 5', '12345678', 'test@gmail.com', 'scrypt:32768:8:1$MTFzhXFmGXVefiIq$363f44543c3f26a12bd128478373eddc5122e3eeeee6b3d30cc026784426673067e8b1ec9a3895bb3905c9ebdf10e36313e70fd034c14fc1be3c9134b5288d5a', 1778680487, NULL, 'aea4fb0dfc414f23acdcf0e286a932ed', NULL, NULL);
+INSERT INTO `users` (`user_id`, `user_name`, `user_last_name`, `user_phone`, `user_email`, `user_password`, `user_address`, `created_at`, `deleted_at`, `user_verification_key`, `user_verified_at`, `user_reset_password_key`) VALUES
+('003dea0d714e42c8b6416af02a92a631', 'PasswordTest', 'Test', '99999999', 'sophiehjelm010203@gmail.com', 'scrypt:32768:8:1$xwhkTq3WNOd1zTJ1$d5752a9457d489dc1de5f2a089f3ac845e337293710b93f996916f6d8a228b4b6bb6c2db13c581798c82031a8b9629087f2f89c39147131dcc3070ebc085f07f', NULL, 1778761898, NULL, '837ffe541def4aeaa3a7da228475e7bb', 1778761906, 'e290917b89d149f8b94d5a77c87aa0f5275ca3e6bdb946ec900d7cb5406b1466'),
+('416dab33ad6b4b099e694c668ea0a13a', 'svp', 'work', '22334455', 'sophie@hjelm.name', 'scrypt:32768:8:1$SHRyHwSLwFAZCJ7D$2911a89888109f917fd24dc353ae1fac3d982e463c04a5b5321804d4ae31ff0a96c270938304022444ec4d36ff094c6f9b73ad16c1596f58293fe0043d2ffbf9', NULL, 1779436369, NULL, '79092bd38dec4ead9eecab5875184628', 1779436451, NULL),
+('463c73471b6640b19b9eb851b66f2f5c', 'PasswordTest', 'Test', '12345678', 'testtoday@gmail.com', 'scrypt:32768:8:1$PdBAuEpAptj1i21B$c424c265b234f9399b0324e7113867a1130f88b9b57b097f9b2320c60fbeb82e597e4a3ae2fc2ee93e0c506f354912f51ce993deb070c58c02ac4b63f274a923', NULL, 1779306365, NULL, '09981dde73894d4c8dc2ee67445a4aa7', NULL, NULL),
+('4d2a63391e40402facfec0af4ddb753a', 'PasswordTest', 'Test', '12345678', 'porfavor@gmail.com', 'scrypt:32768:8:1$VdZlGQDJGyyHlrR5$8e162cc9985f971213f4cf5077326fd007acd5dfd9e0e2fd3ab96a1e5daa66b8c2522c31c48affd754d36ee7862edff2be5221a2fc388560a1a20be8b9b0c0dc', NULL, 1779309780, NULL, '0368e3deaea34b4b8c12d1df37c180eb', NULL, NULL),
+('4eaf8593a6b84ac29947f5596f37b69f', 'Test', 'Testesen', '12345678', 'nyhedsbrifer+test3@gmail.com', 'scrypt:32768:8:1$PU3shy7OHLmwOAJx$21f713c4b73d60f71e315868ef1d59976d4394e9acaac5b338d08196d8a5da908b857553d68f7ab7355cdc8aae122e7e4ed638a3b532a4cc1d2162664b917050', 'Testvej 1, 2620 Albertslund', 1790880060, NULL, '2f772237c14b4a7e8c1cc134d745d38c', 1790880185, 'fd486229abe34f38b0b6e550a874dfa1337ca499253649fa9c63de6ad160241a'),
+('54e34fb7f5734cb2904662cc0a49595a', 'charlotte', 'koudal', '22226666', 'nyhedsbrifer@gmail.com', 'scrypt:32768:8:1$IZO6JfWK0ui1vhXp$ed88a709196de74b0495fd3d1e9cebbbb642e4f2ea6df39dc9e5dd2c3905383de811a2c23e06dbbf3cdb7d25880293b3fcadc76b9954987107e859c77869c488', NULL, 1780308940, NULL, '3e923043696a437ab62537c5888ca3d0', NULL, NULL),
+('590f564104b54da089d1f3895db2ca9d', 'Sophia', 'Kingston', '50591108', 'sophia.anina@gmail.com', 'scrypt:32768:8:1$65XpKpmYn9JyAabo$506ddb55227ee822d1875a8758437892461446f87b535d655ae1e297d55f8f356a5db457a17e884ea41c4a403a3de6232b316cefa617f731960c68585f19eaf7', NULL, 1779624137, NULL, '6a9c42a7322348328be18639af7c7d12', 1779625827, NULL),
+('77b3171a4c554526af28daa7bdc65288', 'cc', 'kk', '44444444', 'c.koudal@gmail.com', 'scrypt:32768:8:1$3xtjS15xTUcw8EcE$51818856ec9d9d1be362942279000b8ebee9f7d230b08108de0d0e99da0ae9ddf13a9a69d965ec055495759bb0243414a3b468c008563f41e3ac0510f21915db', NULL, 1780745753, NULL, '62c5b15603c741d1818fe807c050ca02', 1780745789, NULL),
+('d2548979df7645d9a17862a9ec99a7f0', 'PasswordTest', 'Test', '12345678', 'testing@gmail.com', 'scrypt:32768:8:1$blJKJ1kqv08vdig0$3c83873cad4d1cc984708d603eaa32d6673bf05500c6c47d42e098b341679ce69f6bcb5601d6e70029cedeb0a2405c39845d91bd6c8516191d9e4bde3201c7c2', NULL, 1779434963, NULL, '09a7128dbbd740f28ebc553bbf337383', NULL, NULL),
+('fd88d38fb4804b9093cdb7e3fe54ed17', 'Test 5', 'Test 5', '12345678', 'test@gmail.com', 'scrypt:32768:8:1$MTFzhXFmGXVefiIq$363f44543c3f26a12bd128478373eddc5122e3eeeee6b3d30cc026784426673067e8b1ec9a3895bb3905c9ebdf10e36313e70fd034c14fc1be3c9134b5288d5a', NULL, 1778680487, NULL, 'aea4fb0dfc414f23acdcf0e286a932ed', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -260,6 +264,7 @@ INSERT INTO `user_memberships` (`user_memberships_id`, `membership_user_fk`, `me
 ('3a2cc4de89f94fdda255be7a33f5c54e', 'd2548979df7645d9a17862a9ec99a7f0', '46514f804c0111f18db996d21e5e70c2', 1779434962, NULL, 'active', 1779434963, NULL),
 ('3b40700012b146a79725dc1db767c268', '590f564104b54da089d1f3895db2ca9d', '46514f804c0111f18db996d21e5e70c2', 1779624137, NULL, 'active', 1779624137, NULL),
 ('3bd35242f5cb44e8a99a38b5cc24772b', '5b1a4a2eea7647d5a0a6bb64abec543f', '46514f804c0111f18db996d21e5e70c2', 1780565310, NULL, 'active', 1780565310, NULL),
+('3ed9dcc583ab4599b47ece95141f5d08', '4eaf8593a6b84ac29947f5596f37b69f', '0d5073d1426242c99f9ba711d99f2b34', 1790880059, NULL, 'active', 1790880060, NULL),
 ('4b386662b0e543f69b4a4bb562d0d416', '274d7b9d0b2f40eba06645a1af63116e', '46514f804c0111f18db996d21e5e70c2', 1780568121, NULL, 'active', 1780568121, NULL),
 ('52fc4626949740e9babc98e3f9890fc6', 'cc572ed36b064e53a7e0623efa09dfcf', '46514f804c0111f18db996d21e5e70c2', 1778661461, NULL, 'active', 1778661461, NULL),
 ('66d26f0794bb4a1da2dcc7085904677a', '223c9bf7b2384f20a2bfe6e80d77c5db', '46514f804c0111f18db996d21e5e70c2', 1778661499, NULL, 'active', 1778661499, NULL),

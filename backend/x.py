@@ -17,11 +17,17 @@ from email.mime.text import MIMEText
 def db():
     try:
         db = mysql.connector.connect(
-            host = "mariadb",
-            user = "root",  
-            password = "password",
-            database = "washworld_eksamen"
-        )
+            host = os.getenv("DB_HOST"),
+            user = os.getenv("DB_USER"),
+            password = os.getenv("DB_PASSWORD"),
+            database = os.getenv("DB_NAME")
+)
+        # db = mysql.connector.connect(
+        #     host = "mariadb",
+        #     user = "root",  
+        #     password = "password",
+        #     database = "washworld_eksamen"
+        # )
         cursor = db.cursor(dictionary=True)
         return db, cursor
     except Exception as e:
@@ -148,8 +154,8 @@ def send_email(receiver_email,html):
         # Copy the key :
  
         # Email and password of the sender's Gmail account
-        sender_email = "sophiehjelm010203@gmail.com"
-        password = "vknz xvlf bxrp ijsw"  # If 2FA is on, use an App Password instead
+        sender_email = "charlieeskea@gmail.com"
+        password = "psxb sijs qwmr qkao"  # If 2FA is on, use an App Password instead
  
         # Receiver email address
         # receiver_email = ""

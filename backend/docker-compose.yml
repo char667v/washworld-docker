@@ -10,13 +10,17 @@ services:
       - 80:80 # 0 - 1024 reserved. Use any port from 1025 to 65535
     volumes:
       - .:/app
+    env_file:
+      - .env
  
   mariadb:
     image: mariadb:10.6.20
     container_name: washworld_eksamen_mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: washworld_eksamen
+      # MYSQL_ROOT_PASSWORD: password
+      # MYSQL_DATABASE: washworld_eksamen
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - mariadb_data:/var/lib/mysql
     ports:
@@ -29,7 +33,8 @@ services:
       - mariadb
     environment:
       PMA_HOST: mariadb
-      MYSQL_ROOT_PASSWORD: password
+      # MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
       - 8080:80
  
